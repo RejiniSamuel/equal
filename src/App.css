@@ -1,3 +1,67 @@
+body {
+  /* background: url(./assets/flowers.jpg), url(./assets/sea.jpg);*/
+  /* background: url(https://s3.us-east-2.amazonaws.com/picturesforanyone/images/flowers.jpg); */
+  background-repeat: no-repeat, repeat;
+  background-size: cover;
+  background-color: #950740;
+  opacity: 50%;
+  color: white;
+  font-family: "Georgia";
+}
+
+#content {
+  text-align: center;
+  padding-top: 0%;
+
+  font-size: 2em;
+}
+
+/*
+input[type="checkbox"] {
+  transform: scale(2) !important;
+  margin-left: 5px !important;
+}
+*/
+
+input.largerCheckbox {
+  zoom: 3;
+}
+
+input.largerCheckbox input {
+  margin: 0px 0px 0px 0px !important;
+}
+
+input.largerCheckbox label {
+  margin: 0px 50px 0px 0px !important;
+}
+
+html {
+  height: 100%;
+}
+
+h2 {
+  color: black;
+}
+li {
+  list-style-type: none;
+}
+
+div.center {
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+
+ul {
+  text-align: left;
+}
+
+hr {
+  width: 400px;
+  border-top: 1 px solid #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 .App {
   text-align: center;
 }
@@ -5,7 +69,6 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
-  pointer-events: none;
 }
 
 .App-header {
