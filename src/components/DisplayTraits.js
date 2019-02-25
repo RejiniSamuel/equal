@@ -3,9 +3,10 @@ import Button from "@material-ui/core/Button";
 import TraitsAPI from "../TraitsApi";
 
 import Checkbox from "../components/Checkbox/Checkbox";
-//import Equalizer from "../components/Equalizer/Equalizer";
+//import Traits from "./Traits";
+import Equalizer from "../components/Equalizer/Equalizer";
 //import Examples from "../components/Checkbox/modaltry";
-import Modal from "react-awesome-modal";
+//import Modal from "react-awesome-modal";
 
 //import { Link } from "react-router-dom";
 let _ = require("underscore");
@@ -15,39 +16,24 @@ let _ = require("underscore");
 // *********************************************TRY AND HIDE TRAITS AFTER*****************************************************************
 const OPTIONS = [];
 
-class Traitlist extends Component {
-  state = {
-    selectedTraits: [],
-    submitted: false,
-    visible: false,
-    traits: TraitsAPI,
-    checkboxes: OPTIONS.reduce(
-      (options, option) => ({
-        ...options,
-        [option]: false
-      }),
-      {}
-    )
-  };
-
-  /*  selectAllCheckboxes = isSelected => {
-    Object.keys(this.state.checkboxes).forEach(checkbox => {
-      // BONUS: Can you explain why we pass updater function to setState instead of an object?
-      console.log(
-        "We're here " + isSelected + " " + this.state.checkboxes.isSelected
-      );
-      this.setState(prevState => ({
-        checkboxes: {
-          ...prevState.checkboxes,
-          [checkbox]: isSelected
-        }
-      }));
-    });
-  };
-
-  selectAll = () => this.selectAllCheckboxes(true); */
-
-  // deselectAll = () => this.selectAllCheckboxes(false);
+class DisplayTraits extends Component {
+  constructor(props) {
+    super(props);
+    this.closeEqualizer = this.closeEqualizer.bind(this);
+    this.state = {
+      selectedTraits: [],
+      submitted: false,
+      visible: false,
+      traits: TraitsAPI,
+      checkboxes: OPTIONS.reduce(
+        (options, option) => ({
+          ...options,
+          [option]: false
+        }),
+        {}
+      )
+    };
+  }
 
   handleCheckboxChange = changeEvent => {
     const { name } = changeEvent.target;
@@ -70,8 +56,8 @@ class Traitlist extends Component {
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
     const selectedTraits = [];
-    console.log(selectedTraits);
-    console.log(this.state.checkboxes);
+    //console.log(selectedTraits);
+    //console.log(this.state.checkboxes);
     Object.keys(this.state.checkboxes)
       .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
@@ -98,13 +84,46 @@ class Traitlist extends Component {
 
         //console.log(_.intersection(this.state.traits, selectedTraits));
       });
+    this.setState({ submitted: true });
+    this.setState({ selectedTraits: selectedTraits });
     this.setState({
-      submitted: true,
-      selectedTraits: selectedTraits,
-      visible: true
+      visible: true,
+      submitted: true
     });
     //console.log(selectedTraits);
   };
+
+  closeEqualizer = () => {
+    //console.log("Before " + this.state.selectedTraits);
+    // console.log("Before c" + this.state.checkboxes);
+    this.setState({
+      selectedTraits: [],
+      checkboxes: [],
+      submitted: false
+    });
+
+    // console.log("After " + this.state.selectedTraits);
+    // console.log("After c" + this.state.checkboxes);
+  };
+
+  /*  selectAllCheckboxes = isSelected => {
+    Object.keys(this.state.checkboxes).forEach(checkbox => {
+      // BONUS: Can you explain why we pass updater function to setState instead of an object?
+      console.log(
+        "We're here " + isSelected + " " + this.state.checkboxes.isSelected
+      );
+      this.setState(prevState => ({
+        checkboxes: {
+          ...prevState.checkboxes,
+          [checkbox]: isSelected
+        }
+      }));
+    });
+  };
+
+  selectAll = () => this.selectAllCheckboxes(true); */
+
+  // deselectAll = () => this.selectAllCheckboxes(false);
 
   /*   createCheckbox = option => (
     <Checkbox
@@ -117,73 +136,31 @@ class Traitlist extends Component {
 
   //createCheckboxes = () => OPTIONS.map(this.createCheckbox);
 
-  openModal() {
-    this.setState({
-      visible: true,
-      submitted: true
-    });
-    //   console.log("In traillist open modal fxn " + this.state.submitted);
-  }
-
-  closeModal() {
-    this.setState({
-      visible: false,
-      submitted: false
-    });
-    //  console.log("In traillist close modal fxn " + this.state.submitted);
-  }
-
   renderEqualizer() {
     return (
       <section>
-        <Modal
+        <Equalizer
           visible={this.state.visible}
-          width="80%"
-          height="80%"
-          maxHeight="100vh"
-          overflowY="auto"
-          effect="fadeInUp"
-          onClickAway={() => this.closeModal()}
-        >
-          <div>
-            <ul>
-              {this.state.selectedTraits.map((element, i) => {
-                return (
-                  <li
-                    className=" w-95 bg-purple o-80 br3 pa2 ma3 shadow-5 "
-                    key={this.state.selectedTraits[i]}
-                  >
-                    "{element[0]}" played at "{element[1]}" in "{element[2]}"
-                  </li>
-                );
-              })}
-            </ul>
-
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => this.closeModal()}
-            >
-              RETURN
-            </Button>
-          </div>
-        </Modal>
+          submitted={true}
+          selectedTraits={this.state.selectedTraits}
+          closeEq={this.closeEqualizer}
+        />
       </section>
       // <Examples selectedTraits={this.state.selectedTraits} submitted={false} />
     );
   }
 
   render() {
-    return (
-      <div className="appscroll">
-        <h2>Traits</h2>
-
-        <form onSubmit={this.handleFormSubmit}>
-          <div id="listDiv" className="scroller">
-            <ul>
-              {TraitsAPI.all().map(t => (
-                <li key={t.traitId}>
-                  <div className="w-95 bg-purple o-80 br3 pa2 ma3 shadow-5 ">
+    let showTraits = null;
+    if (!this.state.submitted) {
+      showTraits = (
+        <div className="appscroll">
+          <h2>Character Equalizer Main</h2>
+          <form onSubmit={this.handleFormSubmit}>
+            <div id="listDiv" className="scroller">
+              <ul>
+                {TraitsAPI.all().map(t => (
+                  <li key={t.traitId}>
                     <div className="item">
                       {
                         <Checkbox
@@ -194,34 +171,39 @@ class Traitlist extends Component {
                         />
                       }
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="form-group mt-2">
-            <Button variant="contained" color="primary" type="submit">
-              RUN EQUALIZER
-            </Button>
-          </div>
-        </form>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="form-group mt-2">
+              <Button variant="contained" color="primary" type="submit">
+                RUN EQUALIZER
+              </Button>
+            </div>
+          </form>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <div>{showTraits}</div>
         {this.state.submitted && this.renderEqualizer()}
       </div>
     );
   }
 }
 
-export default Traitlist;
-/* 
+export default DisplayTraits;
+/*
  <div className={`bg-${t.id} black w-20 pa3 br3 ma1'`}>
                     <h3>{p.licExpDate}</h3>
               </div> */
 /*          <Link to={`/roster/${t.traitId}`}>
             {" "}
-            
+
                       </Link> */
 //grow
-/* 
+/*
 <input
   type="button"
   className="f4 grow no-underline br-pill ph3 pv2 mb2 dib black bg-dark-blue"
