@@ -59,19 +59,21 @@ hr {
 }
 
 .appscroll {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 
 .scroller {
   margin: 0 auto;
-  height: 80%;
-  width: 80%;
-  overflow: auto;
+
+  width: 90%;
+
+  height: 80vh; /* or any value */
+  overflow-y: auto;
 }
 
 .item {
-  margin: 30px 0;
+  margin: 10px 0;
 }
 
 .App {
