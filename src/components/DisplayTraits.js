@@ -106,36 +106,6 @@ class DisplayTraits extends Component {
     // console.log("After c" + this.state.checkboxes);
   };
 
-  /*  selectAllCheckboxes = isSelected => {
-    Object.keys(this.state.checkboxes).forEach(checkbox => {
-      // BONUS: Can you explain why we pass updater function to setState instead of an object?
-      console.log(
-        "We're here " + isSelected + " " + this.state.checkboxes.isSelected
-      );
-      this.setState(prevState => ({
-        checkboxes: {
-          ...prevState.checkboxes,
-          [checkbox]: isSelected
-        }
-      }));
-    });
-  };
-
-  selectAll = () => this.selectAllCheckboxes(true); */
-
-  // deselectAll = () => this.selectAllCheckboxes(false);
-
-  /*   createCheckbox = option => (
-    <Checkbox
-      label={option}
-      isSelected={this.state.checkboxes[option]}
-      onCheckboxChange={this.handleCheckboxChange}
-      key={option}
-    />
-  ); */
-
-  //createCheckboxes = () => OPTIONS.map(this.createCheckbox);
-
   renderEqualizer() {
     return (
       <section>

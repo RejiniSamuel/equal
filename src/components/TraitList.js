@@ -70,8 +70,8 @@ class Traitlist extends Component {
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
     const selectedTraits = [];
-    console.log(selectedTraits);
-    console.log(this.state.checkboxes);
+    //console.log(selectedTraits);
+    //console.log(this.state.checkboxes);
     Object.keys(this.state.checkboxes)
       .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
