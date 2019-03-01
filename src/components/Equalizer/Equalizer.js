@@ -5,13 +5,13 @@ const Equalizer = ({ selectedTraits, closeEq }) => {
   return (
     <section>
       <div className="appscroll">
-        <h2>Character Equalizer Results</h2>
+        <h2 className="tc center">Character Equalizer Results</h2>
         <div id="listDiv" className="scroller">
           <ul className="scroller">
             {selectedTraits.map((element, i) => {
               return (
                 <li
-                  className="item w-95 bg-purple o-80 br3 pa2 ma3 shadow-5 "
+                  className="item w-95 bg-light-purple o-80 br3 pa2 ma3 shadow-5 "
                   key={selectedTraits[i]}
                 >
                   <div className="item">
@@ -22,9 +22,14 @@ const Equalizer = ({ selectedTraits, closeEq }) => {
             })}
           </ul>
         </div>
-        <Button variant="contained" color="primary" onClick={closeEq}>
-          RETURN
-        </Button>
+        <div>
+          <p />
+        </div>
+        <div className=" center">
+          <Button variant="contained" color="primary" onClick={closeEq}>
+            RETURN
+          </Button>
+        </div>
       </div>
     </section>
     // <Examples selectedTraits={this.state.selectedTraits} submitted={false} />

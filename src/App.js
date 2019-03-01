@@ -6,10 +6,14 @@ import React from "react";
 //import Header from "./components/Header";
 //import Dashboard from "./components/Dashboard";
 import Main from "./components/Main";
+import logo from "./assets/logo_improv.png";
 import "./App.css";
 
 const App = () => (
   <div>
+    <div id="content">
+      <img alt="" src={logo} className="h4" title="" />
+    </div>
     <Main />
   </div>
 );

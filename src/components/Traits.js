@@ -17,15 +17,16 @@ const Traits = ({ selectedTraits }) => {
         <div className="appscroll">
           <div id="listDiv" className="scroller">
             <ul>
-              {selectedTraits.all.map((element, i) => (
-                <li key={selectedTraits[i]}>
+              {TraitsAPI.all().map(t => (
+                <li key={t.traitId}>
                   <div className="w-95 bg-purple o-80 br3 pa2 ma3 shadow-5 ">
                     <div className="item">
                       {
                         <Checkbox
-                          label={i.name}
+                          label={t.name}
                           isSelected={this.state.checkboxes[false]}
-                          key={i.traitId}
+                          onCheckboxChange={this.handleCheckboxChange}
+                          key={t.traitId}
                         />
                       }
                     </div>

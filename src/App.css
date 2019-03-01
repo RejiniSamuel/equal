@@ -40,7 +40,7 @@ html {
 }
 
 h2 {
-  color: black;
+  color: white;
 }
 li {
   list-style-type: none;
@@ -68,7 +68,7 @@ hr {
 
   width: 90%;
 
-  height: 70vh; /* or any value */
+  height: 65vh; /* or any value */
   overflow-y: auto;
 }
 

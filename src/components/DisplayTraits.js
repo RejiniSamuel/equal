@@ -125,7 +125,7 @@ class DisplayTraits extends Component {
     if (!this.state.submitted) {
       showTraits = (
         <div className="appscroll">
-          <h2>Character Equalizer Main</h2>
+          <h2 className="tc center">Karwisch Character Equalizer</h2>
           <form onSubmit={this.handleFormSubmit}>
             <div id="listDiv" className="scroller">
               <ul>
@@ -145,7 +145,10 @@ class DisplayTraits extends Component {
                 ))}
               </ul>
             </div>
-            <div className="form-group mt-2">
+            <div>
+              <p />
+            </div>
+            <div className="form-group mt-2 center">
               <Button variant="contained" color="primary" type="submit">
                 RUN EQUALIZER
               </Button>
